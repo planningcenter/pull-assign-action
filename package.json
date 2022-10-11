@@ -1,0 +1,25 @@
+{
+  "name": "pull-assign-action",
+  "version": "1.0.0",
+  "description": "a Github action to aassign a PR to the author",
+  "main": "dist/action.js",
+  "scripts": {
+    "build": "ncc build src/action.js -o dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/planningcenter/pull-assign-action.git"
+  },
+  "author": "robertleib",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/planningcenter/pull-assign-action/issues"
+  },
+  "homepage": "https://github.com/planningcenter/pull-assign-action#readme",
+  "devDependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1",
+    "@vercel/ncc": "^0.34.0"
+  }
+}
