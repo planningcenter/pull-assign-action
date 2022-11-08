@@ -18,7 +18,7 @@ const run = async () => {
     const assignees = pr.assignees
     const author = pr.user
 
-    if (!assignees || assignees.length === 0) {
+    if ((!assignees || assignees.length === 0) && author.login !== "dependabot[bot]") {
       await client.request(`POST /repos/${owner}/${repo}/issues/${issue_number}/assignees`, {
         owner,
         repo,
