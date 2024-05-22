@@ -5,9 +5,7 @@ const run = async () => {
   try {
     const githubToken = core.getInput('github_token')
 
-    if (!githubToken) {
-      throw Error(`input 'github_token' is required`)
-    }
+    if (!githubToken) throw Error(`input 'github_token' is required`)
 
     const client = github.getOctokit(githubToken)
     const owner = github.context.payload.repository.owner.login
@@ -18,13 +16,19 @@ const run = async () => {
     const assignees = pr.assignees
     const author = pr.user
 
-    if ((!assignees || assignees.length === 0) && author.login !== "dependabot[bot]") {
-      await client.request(`POST /repos/${owner}/${repo}/issues/${issue_number}/assignees`, {
-        owner,
-        repo,
-        issue_number,
-        assignees: [author.login]
-      })
+    if (
+      (!assignees || assignees.length === 0) &&
+      author.login !== 'dependabot[bot]'
+    ) {
+      await client.request(
+        `POST /repos/${owner}/${repo}/issues/${issue_number}/assignees`,
+        {
+          owner,
+          repo,
+          issue_number,
+          assignees: [author.login],
+        }
+      )
     }
   } catch (error) {
     console.log('Error:', error)
