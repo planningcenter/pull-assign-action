@@ -1,8 +1,8 @@
 {
   "name": "pull-assign-action",
   "version": "1.0.0",
-  "description": "a Github action to aassign a PR to the author",
-  "main": "dist/action.js",
+  "description": "a Github action to assign a PR to the author",
+  "main": "src/action.js",
   "scripts": {
     "build": "ncc build src/action.js -o dist",
     "test": "echo \"Error: no test specified\" && exit 1"
