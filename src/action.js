@@ -22,12 +22,7 @@ const run = async () => {
     ) {
       await client.request(
         `POST /repos/${owner}/${repo}/issues/${issue_number}/assignees`,
-        {
-          owner,
-          repo,
-          issue_number,
-          assignees: [author.login],
-        }
+        { owner, repo, issue_number, assignees: [author.login] }
       )
     }
   } catch (error) {
