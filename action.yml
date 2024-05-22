@@ -1,5 +1,5 @@
 name: "Pull Assign"
-description: "a Github action to aassign a PR to the author"
+description: "a Github action to assign a PR to the author"
 inputs:
   github_token:
     description: A GitHub token.
