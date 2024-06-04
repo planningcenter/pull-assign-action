@@ -9687,38 +9687,41 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(2186)
 const github = __nccwpck_require__(5438)
 
-const run = async () => {
-  try {
-    const githubToken = core.getInput('github_token')
+async function run() {
+  const githubToken = core.getInput('github_token')
 
-    if (!githubToken) throw Error(`input 'github_token' is required`)
+  if (!githubToken) throw Error(`input 'github_token' is required`)
 
-    const client = github.getOctokit(githubToken)
-    const owner = github.context.payload.repository.owner.login
-    const repo = github.context.payload.repository.name
-    const issue_number = github.context.payload.pull_request.number
+  const client = github.getOctokit(githubToken)
+  const owner = github.context.payload.repository.owner.login
+  const repo = github.context.payload.repository.name
+  const issue_number = github.context.payload.pull_request.number
 
-    const pr = github.context.payload.pull_request
-    const assignees = pr.assignees
-    const author = pr.user
+  const pr = github.context.payload.pull_request
+  const assignees = pr.assignees
+  const author = pr.user
 
-    if (
-      (!assignees || assignees.length === 0) &&
-      author.login !== 'dependabot[bot]'
-    ) {
-      await client.request(
-        `POST /repos/${owner}/${repo}/issues/${issue_number}/assignees`,
-        { owner, repo, issue_number, assignees: [author.login] }
-      )
-    }
-  } catch (error) {
-    console.log('Error:', error)
-    core.error(error)
-    core.setFailed(error)
+  console.log(`assignees: ${JSON.stringify(assignees, undefined, 2)}`)
+  console.log(`author: ${JSON.stringify(author, undefined, 2)}`)
+
+  if (
+    (!assignees || assignees.length === 0) &&
+    (author.is_bot === false || (author.type && author.type !== 'Bot'))
+  ) {
+    await client.request(
+      `POST /repos/${owner}/${repo}/issues/${issue_number}/assignees`,
+      { owner, repo, issue_number, assignees: [author.login] }
+    )
   }
 }
 
-run()
+try {
+  run()
+} catch (error) {
+  console.log('Error:', error)
+  core.error(error)
+  core.setFailed(error.message)
+}
 
 })();
 
