@@ -19,7 +19,7 @@ async function run() {
 
   if (
     (!assignees || assignees.length === 0) &&
-    !author.is_bot
+    (author.is_bot === false || (author.type && author.type !== 'Bot'))
   ) {
     await client.request(
       `POST /repos/${owner}/${repo}/issues/${issue_number}/assignees`,
