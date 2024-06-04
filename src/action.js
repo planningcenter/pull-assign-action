@@ -16,6 +16,8 @@ const run = async () => {
     const assignees = pr.assignees
     const author = pr.user
 
+    console.log(`pr: ${JSON.stringify(pr, undefined, 2)}`)
+
     if (
       (!assignees || assignees.length === 0) &&
       author.login !== 'dependabot[bot]'
