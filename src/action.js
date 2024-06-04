@@ -20,7 +20,7 @@ const run = async () => {
 
     if (
       (!assignees || assignees.length === 0) &&
-      author.login !== 'dependabot[bot]'
+      !author.is_bot
     ) {
       await client.request(
         `POST /repos/${owner}/${repo}/issues/${issue_number}/assignees`,
