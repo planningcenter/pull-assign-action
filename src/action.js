@@ -15,7 +15,8 @@ async function run() {
   const assignees = pr.assignees
   const author = pr.user
 
-  console.log(`pr: ${JSON.stringify(pr, undefined, 2)}`)
+  console.log(`assignees: ${JSON.stringify(assignees, undefined, 2)}`)
+  console.log(`author: ${JSON.stringify(author, undefined, 2)}`)
 
   if (
     (!assignees || assignees.length === 0) &&
