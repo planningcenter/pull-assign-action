@@ -5,7 +5,7 @@ This is a GitHub action that assigns a PR owner upon opening a pull request.
 Sample config, place in `.github/workflows/assign.yml`
 
 ```
-name: Pull assign
+name: Pull Assign
 
 on:
   pull_request:
