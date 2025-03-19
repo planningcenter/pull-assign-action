@@ -1,5 +1,9 @@
 name: "Pull Assign"
 description: "a Github action to assign a PR to the author"
+inputs:
+  bot-assignee:
+    description: A user to assign bot-authored PRs to.
+    required: false
 runs:
   using: node20
   main: "dist/index.js"

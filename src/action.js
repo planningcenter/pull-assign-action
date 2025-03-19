@@ -3,6 +3,8 @@ const github = require('@actions/github')
 const { Octokit } = require("@octokit/action")
 
 async function run() {
+  const botAssignee = core.getInput('bot-assignee') || null
+
   const client = new Octokit()
   const owner = github.context.payload.repository.owner.login
   const repo = github.context.payload.repository.name
@@ -17,7 +19,15 @@ async function run() {
 
   if (!assignees || assignees.length === 0) {
     if (author.is_bot || (author.type && author.type === 'Bot')) {
-      console.log(`PR was created by a bot (${author.login}). No assignee added.`)
+      if (botAssignee) {
+        console.log(`PR was created by a bot (${author.login}). Assigning ${botAssignee}.`)
+        await client.request(
+          `POST /repos/${owner}/${repo}/issues/${issue_number}/assignees`,
+          { owner, repo, issue_number, assignees: [botAssignee] }
+        )
+      } else {
+        console.log(`PR was created by a bot (${author.login}), but no bot-assignee was provided. No assignee added.`)
+      }
     } else {
       console.log(`PR was created by a human (${author.login}). Assigning them.`)
       await client.request(
