@@ -1,10 +1,5 @@
 name: "Pull Assign"
 description: "a Github action to assign a PR to the author"
-inputs:
-  github_token:
-    description: A GitHub token.
-    required: false
-    default: ${{ github.token }}
 runs:
   using: node20
   main: "dist/index.js"

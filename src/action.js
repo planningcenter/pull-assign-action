@@ -1,12 +1,9 @@
 const core = require('@actions/core')
 const github = require('@actions/github')
+const { Octokit } = require("@octokit/action")
 
 async function run() {
-  const githubToken = core.getInput('github_token')
-
-  if (!githubToken) throw Error(`input 'github_token' is required`)
-
-  const client = github.getOctokit(githubToken)
+  const client = new Octokit()
   const owner = github.context.payload.repository.owner.login
   const repo = github.context.payload.repository.name
   const issue_number = github.context.payload.pull_request.number

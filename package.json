@@ -19,6 +19,7 @@
   "homepage": "https://github.com/planningcenter/pull-assign-action#readme",
   "dependencies": {
     "@actions/core": "^1.11.1",
-    "@actions/github": "^6.0.0"
+    "@actions/github": "^6.0.0",
+    "@octokit/action": "^7.0.1"
   }
 }
