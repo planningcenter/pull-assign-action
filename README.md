@@ -15,7 +15,7 @@ jobs:
   assign:
     runs-on: ubuntu-latest
     steps:
-      - uses: planningcenter/pull-assign-action@v1.1
+      - uses: planningcenter/pull-assign-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
